@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3A51CA6F2ABE308700197C54 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51CA6E2ABE308700197C54 /* HeaderView.swift */; };
 		3A51CA712ABE31AA00197C54 /* ActionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51CA702ABE31AA00197C54 /* ActionCardView.swift */; };
+		3A51CA792ABE46F300197C54 /* Steps in Frameworks */ = {isa = PBXBuildFile; productRef = 3A51CA782ABE46F300197C54 /* Steps */; };
+		3A51CA7B2ABE596F00197C54 /* BigButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51CA7A2ABE596F00197C54 /* BigButtonView.swift */; };
 		3A6445A72ABD073E00D5D3C7 /* FadingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6445A62ABD073E00D5D3C7 /* FadingTextView.swift */; };
 		3A6445A92ABD342700D5D3C7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3A6445A82ABD342700D5D3C7 /* .gitignore */; };
 		3A7188222AB9390A00DF1439 /* octopusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7188212AB9390A00DF1439 /* octopusApp.swift */; };
@@ -40,6 +42,7 @@
 /* Begin PBXFileReference section */
 		3A51CA6E2ABE308700197C54 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		3A51CA702ABE31AA00197C54 /* ActionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCardView.swift; sourceTree = "<group>"; };
+		3A51CA7A2ABE596F00197C54 /* BigButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButtonView.swift; sourceTree = "<group>"; };
 		3A6445A62ABD073E00D5D3C7 /* FadingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadingTextView.swift; sourceTree = "<group>"; };
 		3A6445A82ABD342700D5D3C7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3A71881E2AB9390A00DF1439 /* octopus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = octopus.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A51CA792ABE46F300197C54 /* Steps in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +116,7 @@
 				3A6445A62ABD073E00D5D3C7 /* FadingTextView.swift */,
 				3A51CA6E2ABE308700197C54 /* HeaderView.swift */,
 				3A51CA702ABE31AA00197C54 /* ActionCardView.swift */,
+				3A51CA7A2ABE596F00197C54 /* BigButtonView.swift */,
 			);
 			path = octopus;
 			sourceTree = "<group>";
@@ -157,6 +162,9 @@
 			dependencies = (
 			);
 			name = octopus;
+			packageProductDependencies = (
+				3A51CA782ABE46F300197C54 /* Steps */,
+			);
 			productName = octopus;
 			productReference = 3A71881E2AB9390A00DF1439 /* octopus.app */;
 			productType = "com.apple.product-type.application";
@@ -230,6 +238,9 @@
 				Base,
 			);
 			mainGroup = 3A7188152AB9390A00DF1439;
+			packageReferences = (
+				3A51CA772ABE46F300197C54 /* XCRemoteSwiftPackageReference "Steps" */,
+			);
 			productRefGroup = 3A71881F2AB9390A00DF1439 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -274,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A7188242AB9390A00DF1439 /* ContentView.swift in Sources */,
+				3A51CA7B2ABE596F00197C54 /* BigButtonView.swift in Sources */,
 				3A6445A72ABD073E00D5D3C7 /* FadingTextView.swift in Sources */,
 				3A7188222AB9390A00DF1439 /* octopusApp.swift in Sources */,
 				3A51CA6F2ABE308700197C54 /* HeaderView.swift in Sources */,
@@ -643,6 +655,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3A51CA772ABE46F300197C54 /* XCRemoteSwiftPackageReference "Steps" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/asam139/Steps";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3A51CA782ABE46F300197C54 /* Steps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A51CA772ABE46F300197C54 /* XCRemoteSwiftPackageReference "Steps" */;
+			productName = Steps;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3A7188162AB9390A00DF1439 /* Project object */;
 }

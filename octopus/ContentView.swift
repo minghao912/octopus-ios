@@ -13,7 +13,13 @@ struct ContentView: View {
     var body: some View {
         VStack {
             HeaderView()
+                .foregroundColor(Color.white)
 
+            Spacer()
+            
+            ActionCardView()
+                .padding()
+            
             Spacer()
             
             Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
@@ -21,6 +27,18 @@ struct ContentView: View {
             }
         }
         .padding()
+        .background(
+            LinearGradient(
+                gradient: Gradient(
+                    colors: [
+                        Color(red: 14/255, green: 06/255, blue: 72/255),
+                        Color(red: 32/255, green: 22/255, blue: 42/255)
+                    ]
+                ),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
     }
 }
 

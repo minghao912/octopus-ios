@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A51CA6F2ABE308700197C54 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51CA6E2ABE308700197C54 /* HeaderView.swift */; };
+		3A51CA712ABE31AA00197C54 /* ActionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51CA702ABE31AA00197C54 /* ActionCardView.swift */; };
 		3A6445A72ABD073E00D5D3C7 /* FadingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6445A62ABD073E00D5D3C7 /* FadingTextView.swift */; };
 		3A6445A92ABD342700D5D3C7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3A6445A82ABD342700D5D3C7 /* .gitignore */; };
 		3A7188222AB9390A00DF1439 /* octopusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7188212AB9390A00DF1439 /* octopusApp.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		3A51CA6E2ABE308700197C54 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		3A51CA702ABE31AA00197C54 /* ActionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCardView.swift; sourceTree = "<group>"; };
 		3A6445A62ABD073E00D5D3C7 /* FadingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadingTextView.swift; sourceTree = "<group>"; };
 		3A6445A82ABD342700D5D3C7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3A71881E2AB9390A00DF1439 /* octopus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = octopus.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +111,7 @@
 				3A7188282AB9390B00DF1439 /* Preview Content */,
 				3A6445A62ABD073E00D5D3C7 /* FadingTextView.swift */,
 				3A51CA6E2ABE308700197C54 /* HeaderView.swift */,
+				3A51CA702ABE31AA00197C54 /* ActionCardView.swift */,
 			);
 			path = octopus;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				3A6445A72ABD073E00D5D3C7 /* FadingTextView.swift in Sources */,
 				3A7188222AB9390A00DF1439 /* octopusApp.swift in Sources */,
 				3A51CA6F2ABE308700197C54 /* HeaderView.swift in Sources */,
+				3A51CA712ABE31AA00197C54 /* ActionCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

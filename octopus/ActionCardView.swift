@@ -14,14 +14,15 @@ struct StepItem {
 }
 
 let baseSteps: [StepItem] = [
-    StepItem(title: "Mode", image: Image(systemName: "antenna.radiowaves.left.and.right")),
-    StepItem(title: "Type", image: Image(systemName: "paperclip")),
-    StepItem(title: "Item", image: Image(systemName: "arrow.up.arrow.down"))
+    StepItem(title: "Choose Mode", image: Image(systemName: "antenna.radiowaves.left.and.right")),
+    StepItem(title: "Choose Type", image: Image(systemName: "paperclip")),
+    StepItem(title: "Transmit Item", image: Image(systemName: "arrow.up.arrow.down"))
 ]
 
 struct ActionCardView: View {
     @State @ObservedObject private var stepsState: StepsState<StepItem>
     @State private var currentStepDetails: [StepItem]
+    @State private var currentStepNumber: Int = 0
     
     init() {
         currentStepDetails = baseSteps
@@ -51,33 +52,56 @@ struct ActionCardView: View {
                     
                     Spacer()
                     
-                    VStack(spacing: 30) {
-                        BigButtonView(buttonAction: { updateMode(sendMode: true) }, buttonIcon: "paperplane", buttonText: "Send")
-                            .setButtonColor(color: .white)
-                            .setTextColor(color: .white)
-                        BigButtonView(buttonAction: { updateMode(sendMode: false) }, buttonIcon: "arrow.down.to.line", buttonText: "Receive")
-                            .setButtonColor(color: .white)
-                            .setTextColor(color: .white)
-                    }
-                    .foregroundColor(.white)
-                    .padding()
+                    getCardContent(currentStepNumber)
+                        .foregroundColor(.white)
+                        .padding()
                     
                     Spacer()
                     
                     Button(action: {
                         self.stepsState = StepsState(data: baseSteps)
                         self.stepsState.setStep(0)
+                        self.currentStepDetails = baseSteps
+                        self.currentStepNumber = 0
                     }) {
                         HStack(spacing: 5) {
-                            Image(systemName: "house")
-                                .foregroundColor(.white)
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                                .foregroundColor(.gray)
                             Text("Restart")
                         }
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(.gray)
                     .padding()
                 }
             )
+    }
+    
+    @ViewBuilder private func getCardContent(_ step: Int) -> some View {
+        switch step {
+        case 0:
+            VStack(spacing: 30) {
+                BigButtonView(buttonAction: { updateMode(sendMode: true) }, buttonIcon: "paperplane", buttonText: "Send")
+                    .setButtonColor(color: .white)
+                    .setTextColor(color: .white)
+                BigButtonView(buttonAction: { updateMode(sendMode: false) }, buttonIcon: "arrow.down.to.line", buttonText: "Receive")
+                    .setButtonColor(color: .white)
+                    .setTextColor(color: .white)
+            }
+        case 1:
+            VStack(spacing: 30) {
+                BigButtonView(buttonAction: { updateType(fileType: true) }, buttonIcon: "doc", buttonText: "File")
+                    .setButtonColor(color: .white)
+                    .setTextColor(color: .white)
+                BigButtonView(buttonAction: { updateType(fileType: false) }, buttonIcon: "textformat", buttonText: "Text")
+                    .setButtonColor(color: .white)
+                    .setTextColor(color: .white)
+            }
+        case 2:
+            VStack(spacing: 30) {
+            }
+        default:
+            exit(1)
+        }
     }
     
     private func updateMode(sendMode: Bool) -> Void {
@@ -85,9 +109,29 @@ struct ActionCardView: View {
             title: sendMode ? "Send" : "Receive",
             image: Image(systemName: "antenna.radiowaves.left.and.right")
         )
+        currentStepDetails[2] = StepItem(
+            title: sendMode ? "Send Item" : "Receive Item",
+            image: Image(systemName: sendMode ? "arrow.up" : "arrow.down")
+        )
         
         self.stepsState = StepsState(data: currentStepDetails)
         self.stepsState.setStep(1)
+        self.currentStepNumber = 1
+    }
+    
+    private func updateType(fileType: Bool) -> Void {
+        currentStepDetails[1] = StepItem(
+            title: fileType ? "File" : "Text",
+            image: Image(systemName: "paperclip")
+        )
+        currentStepDetails[2] = StepItem(
+            title: currentStepDetails[2].title.replacingOccurrences(of: "Item", with: fileType ? "File" : "Text"),
+            image: currentStepDetails[2].image
+        )
+        
+        self.stepsState = StepsState(data: currentStepDetails)
+        self.stepsState.setStep(2)
+        self.currentStepNumber = 2
     }
 }
 

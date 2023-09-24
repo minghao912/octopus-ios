@@ -24,11 +24,12 @@ struct BigButtonView: View {
                 HStack(spacing: 0) {
                     Image(systemName: buttonIcon)
                         .foregroundColor(config.textColor)
-                        .frame(minWidth: 50)
+                        .frame(minWidth: 50, alignment: .leading)
                         .imageScale(.large)
                     Text(buttonText)
                         .foregroundColor(config.textColor)
                         .font(.title)
+                        .frame(alignment: .trailing)
                 }
             }
         }

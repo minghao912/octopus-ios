@@ -20,9 +20,14 @@ let baseSteps: [StepItem] = [
 ]
 
 struct ActionCardView: View {
+    // For Step component
     @State @ObservedObject private var stepsState: StepsState<StepItem>
     @State private var currentStepDetails: [StepItem]
     @State private var currentStepNumber: Int = 0
+    
+    // Remember user state
+    @State private var sendMode: Bool = false
+    @State private var fileType: Bool = false
     
     init() {
         currentStepDetails = baseSteps
@@ -97,8 +102,7 @@ struct ActionCardView: View {
                     .setTextColor(color: .white)
             }
         case 2:
-            VStack(spacing: 30) {
-            }
+            CoreFunctionView(sendMode: sendMode, fileType: fileType)
         default:
             exit(1)
         }
@@ -114,6 +118,7 @@ struct ActionCardView: View {
             image: Image(systemName: sendMode ? "arrow.up" : "arrow.down")
         )
         
+        self.sendMode = sendMode
         self.stepsState = StepsState(data: currentStepDetails)
         self.stepsState.setStep(1)
         self.currentStepNumber = 1
@@ -129,6 +134,7 @@ struct ActionCardView: View {
             image: currentStepDetails[2].image
         )
         
+        self.fileType = fileType
         self.stepsState = StepsState(data: currentStepDetails)
         self.stepsState.setStep(2)
         self.currentStepNumber = 2

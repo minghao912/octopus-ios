@@ -63,12 +63,25 @@ struct SenderView: View {
                             .scrollContentBackground(.hidden)
                             .padding(.all)
                     }
+                    
+                    // Turn text into raw data
+                    Button(action: { sender.fileData = textToSend.data(using: .utf8) }) {
+                        HStack(spacing: 0) {
+                            Image(systemName: "paperplane")
+                                .foregroundColor(.white)
+                                .frame(minWidth: 50, alignment: .leading)
+                                .imageScale(.medium)
+                            Text("Send")
+                                .foregroundColor(.white)
+                                .frame(alignment: .trailing)
+                        }
+                    }
                 } else {
                     // Show document selector for file mode
                     VStack(spacing: 30) {
                         PhotosPicker(
                             selection: $fileToSend,
-                            matching: .images,
+                            matching: .any(of: [.images, .videos]),
                             photoLibrary: .shared()
                         ) {
                             ZStack {
@@ -88,8 +101,16 @@ struct SenderView: View {
                             }
                         }
                         .buttonStyle(.borderless)
+                        .onChange(of: fileToSend) { newPhoto in
+                            // When photo is chosen, load it in as Data type
+                            Task {
+                                if let data = try? await newPhoto?.loadTransferable(type: Data.self) {
+                                    sender.fileData = data
+                                }
+                            }
+                        }
                         
-                        DocumentPickerView() {
+                        DocumentPickerView(documentData: $sender.fileData) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .stroke(.white, lineWidth: 2)
@@ -108,17 +129,6 @@ struct SenderView: View {
                         }
                     }
                     .padding()
-                }
-                
-                Spacer()
-                
-                Button("Test") {
-                    sender.state.wsConnected = true
-                    sender.state.remoteCode = "1234"
-                }
-                
-                Button("Close") {
-                    showCard = false
                 }
             }
             .presentationDetents([.fraction(0.7)])
@@ -154,7 +164,7 @@ struct SenderView: View {
 
 #Preview {
     VStack {
-        SenderView(fileType: true, restart: {})
+        SenderView(fileType: false, restart: {})
     }
     .frame(maxHeight: 800)
     .padding()

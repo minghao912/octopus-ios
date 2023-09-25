@@ -7,17 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A4DC7182ABFF28700148EF5 /* CoreFunctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DC7172ABFF28700148EF5 /* CoreFunctionView.swift */; };
-		3A51CA6F2ABE308700197C54 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51CA6E2ABE308700197C54 /* HeaderView.swift */; };
-		3A51CA712ABE31AA00197C54 /* ActionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51CA702ABE31AA00197C54 /* ActionCardView.swift */; };
+		3A327D532AC1323400586FF0 /* BigButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A327D442AC1323400586FF0 /* BigButtonView.swift */; };
+		3A327D542AC1323400586FF0 /* octopusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A327D452AC1323400586FF0 /* octopusApp.swift */; };
+		3A327D552AC1323400586FF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A327D462AC1323400586FF0 /* Assets.xcassets */; };
+		3A327D562AC1323400586FF0 /* SenderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A327D482AC1323400586FF0 /* SenderState.swift */; };
+		3A327D572AC1323400586FF0 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A327D492AC1323400586FF0 /* Sender.swift */; };
+		3A327D582AC1323400586FF0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A327D4B2AC1323400586FF0 /* Preview Assets.xcassets */; };
+		3A327D592AC1323400586FF0 /* ActionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A327D4C2AC1323400586FF0 /* ActionCardView.swift */; };
+		3A327D5A2AC1323400586FF0 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A327D4D2AC1323400586FF0 /* HeaderView.swift */; };
+		3A327D5B2AC1323400586FF0 /* FadingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A327D4E2AC1323400586FF0 /* FadingTextView.swift */; };
+		3A327D5C2AC1323400586FF0 /* DocumentPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A327D4F2AC1323400586FF0 /* DocumentPickerView.swift */; };
+		3A327D5D2AC1323400586FF0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A327D512AC1323400586FF0 /* ContentView.swift */; };
+		3A327D5E2AC1323400586FF0 /* SenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A327D522AC1323400586FF0 /* SenderView.swift */; };
 		3A51CA792ABE46F300197C54 /* Steps in Frameworks */ = {isa = PBXBuildFile; productRef = 3A51CA782ABE46F300197C54 /* Steps */; };
-		3A51CA7B2ABE596F00197C54 /* BigButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A51CA7A2ABE596F00197C54 /* BigButtonView.swift */; };
-		3A6445A72ABD073E00D5D3C7 /* FadingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6445A62ABD073E00D5D3C7 /* FadingTextView.swift */; };
 		3A6445A92ABD342700D5D3C7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3A6445A82ABD342700D5D3C7 /* .gitignore */; };
-		3A7188222AB9390A00DF1439 /* octopusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7188212AB9390A00DF1439 /* octopusApp.swift */; };
-		3A7188242AB9390A00DF1439 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7188232AB9390A00DF1439 /* ContentView.swift */; };
-		3A7188262AB9390B00DF1439 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A7188252AB9390B00DF1439 /* Assets.xcassets */; };
-		3A71882A2AB9390B00DF1439 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A7188292AB9390B00DF1439 /* Preview Assets.xcassets */; };
 		3A7188342AB9390B00DF1439 /* octopusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7188332AB9390B00DF1439 /* octopusTests.swift */; };
 		3A71883E2AB9390B00DF1439 /* octopusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71883D2AB9390B00DF1439 /* octopusUITests.swift */; };
 		3A7188402AB9390B00DF1439 /* octopusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71883F2AB9390B00DF1439 /* octopusUITestsLaunchTests.swift */; };
@@ -41,18 +44,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3A4DC7172ABFF28700148EF5 /* CoreFunctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreFunctionView.swift; sourceTree = "<group>"; };
-		3A51CA6E2ABE308700197C54 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		3A51CA702ABE31AA00197C54 /* ActionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCardView.swift; sourceTree = "<group>"; };
-		3A51CA7A2ABE596F00197C54 /* BigButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButtonView.swift; sourceTree = "<group>"; };
-		3A6445A62ABD073E00D5D3C7 /* FadingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadingTextView.swift; sourceTree = "<group>"; };
+		3A327D432AC1323400586FF0 /* octopus-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "octopus-Bridging-Header.h"; sourceTree = "<group>"; };
+		3A327D442AC1323400586FF0 /* BigButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigButtonView.swift; sourceTree = "<group>"; };
+		3A327D452AC1323400586FF0 /* octopusApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = octopusApp.swift; sourceTree = "<group>"; };
+		3A327D462AC1323400586FF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A327D482AC1323400586FF0 /* SenderState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderState.swift; sourceTree = "<group>"; };
+		3A327D492AC1323400586FF0 /* Sender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		3A327D4B2AC1323400586FF0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3A327D4C2AC1323400586FF0 /* ActionCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCardView.swift; sourceTree = "<group>"; };
+		3A327D4D2AC1323400586FF0 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		3A327D4E2AC1323400586FF0 /* FadingTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadingTextView.swift; sourceTree = "<group>"; };
+		3A327D4F2AC1323400586FF0 /* DocumentPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentPickerView.swift; sourceTree = "<group>"; };
+		3A327D502AC1323400586FF0 /* octopus.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = octopus.entitlements; sourceTree = "<group>"; };
+		3A327D512AC1323400586FF0 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3A327D522AC1323400586FF0 /* SenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderView.swift; sourceTree = "<group>"; };
 		3A6445A82ABD342700D5D3C7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3A71881E2AB9390A00DF1439 /* octopus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = octopus.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A7188212AB9390A00DF1439 /* octopusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = octopusApp.swift; sourceTree = "<group>"; };
-		3A7188232AB9390A00DF1439 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		3A7188252AB9390B00DF1439 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3A7188272AB9390B00DF1439 /* octopus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = octopus.entitlements; sourceTree = "<group>"; };
-		3A7188292AB9390B00DF1439 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3A71882F2AB9390B00DF1439 /* octopusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = octopusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A7188332AB9390B00DF1439 /* octopusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = octopusTests.swift; sourceTree = "<group>"; };
 		3A7188392AB9390B00DF1439 /* octopusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = octopusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,11 +93,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A327D422AC1323400586FF0 /* octopus */ = {
+			isa = PBXGroup;
+			children = (
+				3A327D4C2AC1323400586FF0 /* ActionCardView.swift */,
+				3A327D462AC1323400586FF0 /* Assets.xcassets */,
+				3A327D442AC1323400586FF0 /* BigButtonView.swift */,
+				3A327D512AC1323400586FF0 /* ContentView.swift */,
+				3A327D4F2AC1323400586FF0 /* DocumentPickerView.swift */,
+				3A327D4E2AC1323400586FF0 /* FadingTextView.swift */,
+				3A327D4D2AC1323400586FF0 /* HeaderView.swift */,
+				3A327D432AC1323400586FF0 /* octopus-Bridging-Header.h */,
+				3A327D502AC1323400586FF0 /* octopus.entitlements */,
+				3A327D452AC1323400586FF0 /* octopusApp.swift */,
+				3A327D4A2AC1323400586FF0 /* Preview Content */,
+				3A327D522AC1323400586FF0 /* SenderView.swift */,
+				3A327D472AC1323400586FF0 /* utils */,
+			);
+			path = octopus;
+			sourceTree = "<group>";
+		};
+		3A327D472AC1323400586FF0 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				3A327D482AC1323400586FF0 /* SenderState.swift */,
+				3A327D492AC1323400586FF0 /* Sender.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		3A327D4A2AC1323400586FF0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3A327D4B2AC1323400586FF0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		3A7188152AB9390A00DF1439 = {
 			isa = PBXGroup;
 			children = (
+				3A327D422AC1323400586FF0 /* octopus */,
 				3A6445A82ABD342700D5D3C7 /* .gitignore */,
-				3A7188202AB9390A00DF1439 /* octopus */,
 				3A7188322AB9390B00DF1439 /* octopusTests */,
 				3A71883C2AB9390B00DF1439 /* octopusUITests */,
 				3A71881F2AB9390A00DF1439 /* Products */,
@@ -105,31 +149,6 @@
 				3A7188392AB9390B00DF1439 /* octopusUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		3A7188202AB9390A00DF1439 /* octopus */ = {
-			isa = PBXGroup;
-			children = (
-				3A7188212AB9390A00DF1439 /* octopusApp.swift */,
-				3A7188232AB9390A00DF1439 /* ContentView.swift */,
-				3A7188252AB9390B00DF1439 /* Assets.xcassets */,
-				3A7188272AB9390B00DF1439 /* octopus.entitlements */,
-				3A7188282AB9390B00DF1439 /* Preview Content */,
-				3A6445A62ABD073E00D5D3C7 /* FadingTextView.swift */,
-				3A51CA6E2ABE308700197C54 /* HeaderView.swift */,
-				3A51CA702ABE31AA00197C54 /* ActionCardView.swift */,
-				3A51CA7A2ABE596F00197C54 /* BigButtonView.swift */,
-				3A4DC7172ABFF28700148EF5 /* CoreFunctionView.swift */,
-			);
-			path = octopus;
-			sourceTree = "<group>";
-		};
-		3A7188282AB9390B00DF1439 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				3A7188292AB9390B00DF1439 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		3A7188322AB9390B00DF1439 /* octopusTests */ = {
@@ -260,9 +279,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A71882A2AB9390B00DF1439 /* Preview Assets.xcassets in Resources */,
+				3A327D552AC1323400586FF0 /* Assets.xcassets in Resources */,
+				3A327D582AC1323400586FF0 /* Preview Assets.xcassets in Resources */,
 				3A6445A92ABD342700D5D3C7 /* .gitignore in Resources */,
-				3A7188262AB9390B00DF1439 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,13 +306,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A7188242AB9390A00DF1439 /* ContentView.swift in Sources */,
-				3A51CA7B2ABE596F00197C54 /* BigButtonView.swift in Sources */,
-				3A4DC7182ABFF28700148EF5 /* CoreFunctionView.swift in Sources */,
-				3A6445A72ABD073E00D5D3C7 /* FadingTextView.swift in Sources */,
-				3A7188222AB9390A00DF1439 /* octopusApp.swift in Sources */,
-				3A51CA6F2ABE308700197C54 /* HeaderView.swift in Sources */,
-				3A51CA712ABE31AA00197C54 /* ActionCardView.swift in Sources */,
+				3A327D572AC1323400586FF0 /* Sender.swift in Sources */,
+				3A327D5A2AC1323400586FF0 /* HeaderView.swift in Sources */,
+				3A327D532AC1323400586FF0 /* BigButtonView.swift in Sources */,
+				3A327D5C2AC1323400586FF0 /* DocumentPickerView.swift in Sources */,
+				3A327D562AC1323400586FF0 /* SenderState.swift in Sources */,
+				3A327D5D2AC1323400586FF0 /* ContentView.swift in Sources */,
+				3A327D5B2AC1323400586FF0 /* FadingTextView.swift in Sources */,
+				3A327D542AC1323400586FF0 /* octopusApp.swift in Sources */,
+				3A327D592AC1323400586FF0 /* ActionCardView.swift in Sources */,
+				3A327D5E2AC1323400586FF0 /* SenderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,10 +490,12 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown \nUIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft \nUIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -480,7 +504,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.chenminghao.octopus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos \niphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "octopus/octopus-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -509,10 +533,12 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown \nUIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft \nUIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -521,7 +547,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.chenminghao.octopus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos \niphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "octopus/octopus-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -544,7 +570,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.chenminghao.octopusTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos \niphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -567,7 +593,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.chenminghao.octopusTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos \niphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -589,7 +615,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.chenminghao.octopusUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos \niphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -611,7 +637,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.chenminghao.octopusUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos \niphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

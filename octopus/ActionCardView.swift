@@ -58,17 +58,13 @@ struct ActionCardView: View {
                     Spacer()
                     
                     getCardContent(currentStepNumber)
+                        .frame(maxWidth: .infinity)
                         .foregroundColor(.white)
                         .padding()
                     
                     Spacer()
                     
-                    Button(action: {
-                        self.stepsState = StepsState(data: baseSteps)
-                        self.stepsState.setStep(0)
-                        self.currentStepDetails = baseSteps
-                        self.currentStepNumber = 0
-                    }) {
+                    Button(action: restart) {
                         HStack(spacing: 5) {
                             Image(systemName: "arrow.triangle.2.circlepath")
                                 .foregroundColor(.gray)
@@ -102,10 +98,19 @@ struct ActionCardView: View {
                     .setTextColor(color: .white)
             }
         case 2:
-            CoreFunctionView(sendMode: sendMode, fileType: fileType)
+            if (sendMode) {
+                SenderView(fileType: fileType, restart: restart)
+            }
         default:
             exit(1)
         }
+    }
+    
+    private func restart() -> Void {
+        self.stepsState = StepsState(data: baseSteps)
+        self.stepsState.setStep(0)
+        self.currentStepDetails = baseSteps
+        self.currentStepNumber = 0
     }
     
     private func updateMode(sendMode: Bool) -> Void {

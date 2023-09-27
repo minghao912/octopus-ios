@@ -9,20 +9,20 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct DocumentPickerView<Content>: View where Content: View {
+    let onSuccess: (String, Data) -> Void
     let children: () -> Content
 
     @State private var showDocPicker: Bool = false
-    @Binding var documentData: Data?
     
-    init(documentData: Binding<Data?>, @ViewBuilder children: @escaping () -> Content) {
-        self._documentData = documentData
+    init(onSuccess: @escaping (String, Data) -> Void, @ViewBuilder children: @escaping () -> Content) {
+        self.onSuccess = onSuccess
         self.children = children
     }
     
     var body: some View {
         children()
             .sheet(isPresented: $showDocPicker) {
-                DocumentPicker(documentData: $documentData)
+                DocumentPicker(onSuccess: self.onSuccess)
             }
             .onTapGesture {
                 self.showDocPicker = true
@@ -31,7 +31,7 @@ struct DocumentPickerView<Content>: View where Content: View {
 }
 
 struct DocumentPicker: UIViewControllerRepresentable {
-    @Binding var documentData: Data?
+    let onSuccess: (String, Data) -> Void
     
     func makeCoordinator() -> DocumentPicker.Coordinator {
         return DocumentPicker.Coordinator(parent: self)
@@ -73,7 +73,7 @@ struct DocumentPicker: UIViewControllerRepresentable {
                 do {
                     // Read from URL as Data type
                     let data = try Data(contentsOf: cleanURL)
-                    parent.documentData = data
+                    self.parent.onSuccess(cleanURL.lastPathComponent, data)
                 } catch {
                     print("Error loading document data: \(error)")
                 }

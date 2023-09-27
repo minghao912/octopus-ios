@@ -9,10 +9,12 @@ import Foundation
 
 struct Sender {
     public var state: SenderState = SenderState()
+    public var fileName: String = ""
+    public var fileSize: UInt64 = 0
     public var fileData: Data? = nil {
         didSet {
             // If non-nil, call sendData
-            if let fileData = fileData {
+            if let fileData {
                 sendData(fileData)
             }
         }

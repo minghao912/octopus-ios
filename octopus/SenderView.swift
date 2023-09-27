@@ -13,10 +13,13 @@ struct SenderView: View {
     let restart: () -> Void
     
     @State var sender: Sender = Sender()
-    @State var showCard: Bool = false
+    @State var showFileSelectorCard: Bool = false
+    @State var showFilePreviewCard: Bool = false
     
     @State var textToSend: String = ""
-    @State var fileToSend: PhotosPickerItem? = nil
+    @State var photoToSendPre: PhotosPickerItem? = nil
+    @State var photoToSendImg: UIImage? = nil
+    @State var fileToSendName: String = ""
     
     init(fileType: Bool, restart: @escaping () -> Void) {
         self.fileType = fileType
@@ -27,21 +30,17 @@ struct SenderView: View {
         VStack {
             // Shouldn't do this but OK
             Button("Let's go!") {
-                self.showCard = true
+                self.showFileSelectorCard = true
             }
         }
-        .onAppear(perform: { self.showCard = true })
-        .sheet(isPresented: $showCard, onDismiss: restart) {
+        .onAppear(perform: { self.showFileSelectorCard = true })
+        .sheet(isPresented: $showFileSelectorCard, onDismiss: restart) {
             VStack {
                 Text(fileType ? "Send a File" : "Send a Text")
                     .font(.title)
                     .fontWeight(.bold)
                 
                 Divider()
-                
-                getConnectionStatus()
-                    .frame(alignment: .leading)
-                    .padding()
                 
                 if (!fileType) {
                     // Show text input field for text mode
@@ -65,7 +64,14 @@ struct SenderView: View {
                     }
                     
                     // Turn text into raw data
-                    Button(action: { sender.fileData = textToSend.data(using: .utf8) }) {
+                    Button(
+                        action: {
+                            sender.fileData = textToSend.data(using: .utf8)
+                            
+                            self.showFileSelectorCard = false
+                            self.showFilePreviewCard = true
+                        }
+                    ) {
                         HStack(spacing: 0) {
                             Image(systemName: "paperplane")
                                 .foregroundColor(.white)
@@ -80,7 +86,7 @@ struct SenderView: View {
                     // Show document selector for file mode
                     VStack(spacing: 30) {
                         PhotosPicker(
-                            selection: $fileToSend,
+                            selection: $photoToSendPre,
                             matching: .any(of: [.images, .videos]),
                             photoLibrary: .shared()
                         ) {
@@ -101,16 +107,49 @@ struct SenderView: View {
                             }
                         }
                         .buttonStyle(.borderless)
-                        .onChange(of: fileToSend) { newPhoto in
+                        .onChange(of: photoToSendPre) { newPhoto in
                             // When photo is chosen, load it in as Data type
                             Task {
-                                if let data = try? await newPhoto?.loadTransferable(type: Data.self) {
-                                    sender.fileData = data
+                                if let newPhoto {
+                                    // This loads the photo as raw data, for sending
+                                    newPhoto.loadTransferable(type: Data.self) { result in
+                                        DispatchQueue.main.async {
+                                            guard newPhoto == self.photoToSendPre else {
+                                                print("Failed to get selected photo")
+                                                return
+                                            }
+                                            
+                                            switch result {
+                                            case .success(let data):
+                                                print("Success loading photo")
+                                                
+                                                // Set sender data
+                                                sender.fileData = data
+                                                self.photoToSendImg = UIImage(data: data!)
+                                                
+                                                // Show preview card
+                                                self.showFileSelectorCard = false
+                                                self.showFilePreviewCard = true
+                                            case .failure(let error):
+                                                print("Failed loading photo: \(error)")
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
                         
-                        DocumentPickerView(documentData: $sender.fileData) {
+                        DocumentPickerView(
+                            onSuccess: { filename, data in
+                                // Set sender data
+                                self.fileToSendName = filename
+                                sender.fileData = data
+                                
+                                // Show preview card
+                                self.showFileSelectorCard = false
+                                self.showFilePreviewCard = true
+                            }
+                        ) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 20)
                                     .stroke(.white, lineWidth: 2)
@@ -133,6 +172,14 @@ struct SenderView: View {
             }
             .presentationDetents([.fraction(0.7)])
             .padding()
+        }
+        .sheet(isPresented: $showFilePreviewCard, onDismiss: restart) {
+            FilePreviewView(
+                connectionStatusView: AnyView(self.getConnectionStatus()),
+                textToSend: $textToSend,
+                photoToSendImg: $photoToSendImg,
+                fileToSendName: $fileToSendName
+            )
         }
     }
     
@@ -162,9 +209,66 @@ struct SenderView: View {
     }
 }
 
+struct FilePreviewView: View {
+    let connectionStatusView: AnyView
+    
+    @Binding var textToSend: String
+    @Binding var photoToSendImg: UIImage?
+    @Binding var fileToSendName: String
+    
+    var body: some View {
+        VStack {
+            connectionStatusView
+                .frame(alignment: .leading)
+                .padding()
+            
+            Divider()
+            Spacer()
+            
+            // Show text preview
+            if (!textToSend.isEmpty) {
+                TextEditor(text: $textToSend)
+                    .scrollContentBackground(.hidden)
+                    .padding(.all)
+                    .disabled(true)
+                    .scrollIndicators(.visible)
+            }
+            // Show photo preview
+            else if self.photoToSendImg != nil {
+                Image(uiImage: self.photoToSendImg!)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 300)
+            }
+            // Show file preview
+            else if (!fileToSendName.isEmpty) {
+                VStack {
+                    Image(systemName: "doc")
+                        .font(.system(size: 144))
+                        .fontWeight(.light)
+                        .padding(.bottom)
+                    
+                    Text(fileToSendName)
+                        .font(.callout)
+                        .multilineTextAlignment(.center)
+                }
+                .padding()
+            }
+            // Show error
+            else {
+                Text("File preview not available")
+            }
+            
+            Spacer()
+        }
+        .presentationDetents([.fraction(0.7)])
+        .padding()
+    }
+}
+
 #Preview {
     VStack {
-        SenderView(fileType: false, restart: {})
+        SenderView(fileType: true, restart: {})
     }
     .frame(maxHeight: 800)
     .padding()

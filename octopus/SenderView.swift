@@ -184,10 +184,10 @@ struct SenderView: View {
     }
     
     @ViewBuilder private func getConnectionStatus() -> some View {
-        if (!sender.state.wsConnected) {
+        if (sender.state.wsConnected != .connected) {
             Text("Disconnected")
                 .foregroundColor(.red)
-        } else if (sender.state.wsConnected && !sender.state.remoteConnected) {
+        } else if (sender.state.wsConnected == .connected && !sender.state.remoteConnected) {
             VStack(spacing: 0) {
                 Text("Waiting for remote connection")
                     .foregroundColor(.yellow)
@@ -196,7 +196,7 @@ struct SenderView: View {
                         .fontWeight(.bold)
                 }
             }
-        } else if (sender.state.wsConnected && sender.state.remoteConnected) {
+        } else if (sender.state.wsConnected == .connected && sender.state.remoteConnected) {
             VStack(spacing: 0) {
                 Text("Connected")
                     .foregroundColor(.yellow)

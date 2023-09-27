@@ -24,6 +24,7 @@
 		3A7188342AB9390B00DF1439 /* octopusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7188332AB9390B00DF1439 /* octopusTests.swift */; };
 		3A71883E2AB9390B00DF1439 /* octopusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71883D2AB9390B00DF1439 /* octopusUITests.swift */; };
 		3A7188402AB9390B00DF1439 /* octopusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71883F2AB9390B00DF1439 /* octopusUITestsLaunchTests.swift */; };
+		3AEC26E02AC4EF470041A8A0 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 3AEC26DF2AC4EF470041A8A0 /* Starscream */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A51CA792ABE46F300197C54 /* Steps in Frameworks */,
+				3AEC26E02AC4EF470041A8A0 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +188,7 @@
 			name = octopus;
 			packageProductDependencies = (
 				3A51CA782ABE46F300197C54 /* Steps */,
+				3AEC26DF2AC4EF470041A8A0 /* Starscream */,
 			);
 			productName = octopus;
 			productReference = 3A71881E2AB9390A00DF1439 /* octopus.app */;
@@ -262,6 +265,7 @@
 			mainGroup = 3A7188152AB9390A00DF1439;
 			packageReferences = (
 				3A51CA772ABE46F300197C54 /* XCRemoteSwiftPackageReference "Steps" */,
+				3AEC26DE2AC4EF470041A8A0 /* XCRemoteSwiftPackageReference "Starscream" */,
 			);
 			productRefGroup = 3A71881F2AB9390A00DF1439 /* Products */;
 			projectDirPath = "";
@@ -695,6 +699,14 @@
 				minimumVersion = 0.3.9;
 			};
 		};
+		3AEC26DE2AC4EF470041A8A0 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -702,6 +714,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3A51CA772ABE46F300197C54 /* XCRemoteSwiftPackageReference "Steps" */;
 			productName = Steps;
+		};
+		3AEC26DF2AC4EF470041A8A0 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AEC26DE2AC4EF470041A8A0 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

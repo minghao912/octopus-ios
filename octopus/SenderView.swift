@@ -34,151 +34,24 @@ struct SenderView: View {
             }
         }
         .onAppear(perform: { self.showFileSelectorCard = true })
-        .sheet(isPresented: $showFileSelectorCard, onDismiss: restart) {
-            VStack {
-                Text(fileType ? "Send a File" : "Send a Text")
-                    .font(.title)
-                    .fontWeight(.bold)
-                
-                Divider()
-                
-                if (!fileType) {
-                    // Show text input field for text mode
-                    ZStack(alignment: .leading) {
-                        if (textToSend.isEmpty) {
-                            VStack {
-                                HStack {
-                                    Text("Enter text")
-                                        .foregroundColor(.gray)
-                                    Spacer()
-                                }
-                                .padding(EdgeInsets(top: 8, leading: 8, bottom: 0, trailing: 0))
-                                Spacer()
-                            }
-                            .padding(.all)
-                        }
-                        
-                        TextEditor(text: $textToSend)
-                            .scrollContentBackground(.hidden)
-                            .padding(.all)
-                    }
-                    
-                    // Turn text into raw data
-                    Button(
-                        action: {
-                            sender.fileData = textToSend.data(using: .utf8)
-                            
-                            self.showFileSelectorCard = false
-                            self.showFilePreviewCard = true
-                        }
-                    ) {
-                        HStack(spacing: 0) {
-                            Image(systemName: "paperplane")
-                                .foregroundColor(.white)
-                                .frame(minWidth: 50, alignment: .leading)
-                                .imageScale(.medium)
-                            Text("Send")
-                                .foregroundColor(.white)
-                                .frame(alignment: .trailing)
-                        }
-                    }
-                } else {
-                    // Show document selector for file mode
-                    VStack(spacing: 30) {
-                        PhotosPicker(
-                            selection: $photoToSendPre,
-                            matching: .any(of: [.images, .videos]),
-                            photoLibrary: .shared()
-                        ) {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.white, lineWidth: 2)
-                                    .frame(maxWidth: .infinity)
-                                
-                                HStack(spacing: 0) {
-                                    Image(systemName: "photo")
-                                        .frame(minWidth: 50, alignment: .leading)
-                                        .imageScale(.large)
-                                    Text("Photo")
-                                        .font(.title)
-                                        .frame(alignment: .trailing)
-                                }
-                                .foregroundColor(.white)
-                            }
-                        }
-                        .buttonStyle(.borderless)
-                        .onChange(of: photoToSendPre) { newPhoto in
-                            // When photo is chosen, load it in as Data type
-                            Task {
-                                if let newPhoto {
-                                    // This loads the photo as raw data, for sending
-                                    newPhoto.loadTransferable(type: Data.self) { result in
-                                        DispatchQueue.main.async {
-                                            guard newPhoto == self.photoToSendPre else {
-                                                print("Failed to get selected photo")
-                                                return
-                                            }
-                                            
-                                            switch result {
-                                            case .success(let data):
-                                                print("Success loading photo")
-                                                
-                                                // Set sender data
-                                                sender.fileData = data
-                                                self.photoToSendImg = UIImage(data: data!)
-                                                
-                                                // Show preview card
-                                                self.showFileSelectorCard = false
-                                                self.showFilePreviewCard = true
-                                            case .failure(let error):
-                                                print("Failed loading photo: \(error)")
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        
-                        DocumentPickerView(
-                            onSuccess: { filename, data in
-                                // Set sender data
-                                self.fileToSendName = filename
-                                sender.fileData = data
-                                
-                                // Show preview card
-                                self.showFileSelectorCard = false
-                                self.showFilePreviewCard = true
-                            }
-                        ) {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.white, lineWidth: 2)
-                                    .frame(maxWidth: .infinity)
-                                
-                                HStack(spacing: 0) {
-                                    Image(systemName: "doc")
-                                        .frame(minWidth: 50, alignment: .leading)
-                                        .imageScale(.large)
-                                    Text("File")
-                                        .font(.title)
-                                        .frame(alignment: .trailing)
-                                }
-                                .foregroundColor(.white)
-                            }
-                        }
-                    }
-                    .padding()
-                }
-            }
-            .presentationDetents([.fraction(0.7)])
-            .padding()
+        .sheet(isPresented: self.$showFileSelectorCard, onDismiss: self.restart) {
+            FileSelectorSubview(
+                fileType: self.fileType,
+                sender: self.$sender,
+                showFileSelectorCard: self.$showFileSelectorCard,
+                showFilePreviewCard: self.$showFilePreviewCard,
+                textToSend: self.$textToSend,
+                photoToSendPre: self.$photoToSendPre,
+                photoToSendImg: self.$photoToSendImg,
+                fileToSendName: self.$fileToSendName
+            )
         }
         .sheet(isPresented: $showFilePreviewCard, onDismiss: restart) {
-            FilePreviewView(
+            FilePreviewSubview(
                 connectionStatusView: AnyView(self.getConnectionStatus()),
-                textToSend: $textToSend,
-                photoToSendImg: $photoToSendImg,
-                fileToSendName: $fileToSendName
+                textToSend: self.$textToSend,
+                photoToSendImg: self.$photoToSendImg,
+                fileToSendName: self.$fileToSendName
             )
         }
     }
@@ -199,7 +72,7 @@ struct SenderView: View {
         } else if (sender.state.wsConnected == .connected && sender.state.remoteConnected) {
             VStack(spacing: 0) {
                 Text("Connected")
-                    .foregroundColor(.yellow)
+                    .foregroundColor(.green)
                 if (sender.state.remoteCode != "") {
                     Text(" on \(sender.state.remoteCode)")
                         .fontWeight(.bold)
@@ -209,7 +82,165 @@ struct SenderView: View {
     }
 }
 
-struct FilePreviewView: View {
+struct FileSelectorSubview: View {
+    let fileType: Bool
+    
+    @Binding var sender: Sender
+    @Binding var showFileSelectorCard: Bool
+    @Binding var showFilePreviewCard: Bool
+    
+    @Binding var textToSend: String
+    @Binding var photoToSendPre: PhotosPickerItem?
+    @Binding var photoToSendImg: UIImage?
+    @Binding var fileToSendName: String
+    
+    var body: some View {
+        VStack {
+            Text(fileType ? "Send a File" : "Send a Text")
+                .font(.title)
+                .fontWeight(.bold)
+            
+            Divider()
+            
+            if (!fileType) {
+                // Show text input field for text mode
+                ZStack(alignment: .leading) {
+                    if (textToSend.isEmpty) {
+                        VStack {
+                            HStack {
+                                Text("Enter text")
+                                    .foregroundColor(.gray)
+                                Spacer()
+                            }
+                            .padding(EdgeInsets(top: 8, leading: 8, bottom: 0, trailing: 0))
+                            Spacer()
+                        }
+                        .padding(.all)
+                    }
+                    
+                    TextEditor(text: $textToSend)
+                        .scrollContentBackground(.hidden)
+                        .padding(.all)
+                }
+                
+                // Turn text into raw data
+                Button(
+                    action: {
+                        sender.fileData = textToSend.data(using: .utf8)
+                        
+                        self.showFileSelectorCard = false
+                        self.showFilePreviewCard = true
+                    }
+                ) {
+                    HStack(spacing: 0) {
+                        Image(systemName: "paperplane")
+                            .foregroundColor(.white)
+                            .frame(minWidth: 50, alignment: .leading)
+                            .imageScale(.medium)
+                        Text("Send")
+                            .foregroundColor(.white)
+                            .frame(alignment: .trailing)
+                    }
+                }
+            } else {
+                // Show document selector for file mode
+                VStack(spacing: 30) {
+                    PhotosPicker(
+                        selection: $photoToSendPre,
+                        matching: .any(of: [.images, .videos]),
+                        photoLibrary: .shared()
+                    ) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.white, lineWidth: 2)
+                                .frame(maxWidth: .infinity)
+                            
+                            HStack(spacing: 0) {
+                                Image(systemName: "photo")
+                                    .frame(minWidth: 50, alignment: .leading)
+                                    .imageScale(.large)
+                                Text("Photo")
+                                    .font(.title)
+                                    .frame(alignment: .trailing)
+                            }
+                            .foregroundColor(.white)
+                        }
+                    }
+                    .buttonStyle(.borderless)
+                    .onChange(of: photoToSendPre) { newPhoto in
+                        // When photo is chosen, load it in as Data type
+                        Task {
+                            if let newPhoto {
+                                // This loads the photo as raw data, for sending
+                                newPhoto.loadTransferable(type: Data.self) { result in
+                                    DispatchQueue.main.async {
+                                        guard newPhoto == self.photoToSendPre else {
+                                            print("Failed to get selected photo")
+                                            return
+                                        }
+                                        
+                                        switch result {
+                                        case .success(let data):
+                                            print("Success loading photo")
+                                            
+                                            // Set sender data
+                                            sender.fileName = String(
+                                                newPhoto.itemIdentifier?.split(separator: "/").first
+                                                ?? "Image"
+                                            ) + ".png"
+                                            sender.fileData = data
+                                            self.photoToSendImg = UIImage(data: data!)
+                                            
+                                            // Show preview card
+                                            self.showFileSelectorCard = false
+                                            self.showFilePreviewCard = true
+                                        case .failure(let error):
+                                            print("Failed loading photo: \(error)")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    DocumentPickerView(
+                        onSuccess: { filename, data in
+                            // Set sender data
+                            self.fileToSendName = filename
+                            sender.fileName = filename
+                            sender.fileData = data
+                            
+                            // Show preview card
+                            self.showFileSelectorCard = false
+                            self.showFilePreviewCard = true
+                        }
+                    ) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(.white, lineWidth: 2)
+                                .frame(maxWidth: .infinity)
+                            
+                            HStack(spacing: 0) {
+                                Image(systemName: "doc")
+                                    .frame(minWidth: 50, alignment: .leading)
+                                    .imageScale(.large)
+                                Text("File")
+                                    .font(.title)
+                                    .frame(alignment: .trailing)
+                            }
+                            .foregroundColor(.white)
+                        }
+                    }
+                }
+                .padding()
+            }
+        }
+        .presentationDetents([.fraction(0.7)])
+        .padding()
+    }
+}
+
+struct FilePreviewSubview: View {
     let connectionStatusView: AnyView
     
     @Binding var textToSend: String
@@ -268,7 +299,7 @@ struct FilePreviewView: View {
 
 #Preview {
     VStack {
-        SenderView(fileType: true, restart: {})
+        SenderView(fileType: false, restart: {})
     }
     .frame(maxHeight: 800)
     .padding()

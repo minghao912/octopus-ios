@@ -12,7 +12,7 @@ struct SenderView: View {
     let fileType: Bool
     let restart: () -> Void
     
-    @State var sender: Sender = Sender()
+    @StateObject var sender: Sender = Sender()
     @State var showFileSelectorCard: Bool = false
     @State var showFilePreviewCard: Bool = false
     
@@ -37,7 +37,7 @@ struct SenderView: View {
         .sheet(isPresented: self.$showFileSelectorCard, onDismiss: self.restart) {
             FileSelectorSubview(
                 fileType: self.fileType,
-                sender: self.$sender,
+                sender: self.sender,
                 showFileSelectorCard: self.$showFileSelectorCard,
                 showFilePreviewCard: self.$showFilePreviewCard,
                 textToSend: self.$textToSend,
@@ -48,44 +48,19 @@ struct SenderView: View {
         }
         .sheet(isPresented: $showFilePreviewCard, onDismiss: restart) {
             FilePreviewSubview(
-                connectionStatusView: AnyView(self.getConnectionStatus()),
+                senderState: self.sender.state,
                 textToSend: self.$textToSend,
                 photoToSendImg: self.$photoToSendImg,
                 fileToSendName: self.$fileToSendName
             )
         }
     }
-    
-    @ViewBuilder private func getConnectionStatus() -> some View {
-        if (sender.state.wsConnected != .connected) {
-            Text("Disconnected")
-                .foregroundColor(.red)
-        } else if (sender.state.wsConnected == .connected && !sender.state.remoteConnected) {
-            VStack(spacing: 0) {
-                Text("Waiting for remote connection")
-                    .foregroundColor(.yellow)
-                if (sender.state.remoteCode != "") {
-                    Text(" on \(sender.state.remoteCode)")
-                        .fontWeight(.bold)
-                }
-            }
-        } else if (sender.state.wsConnected == .connected && sender.state.remoteConnected) {
-            VStack(spacing: 0) {
-                Text("Connected")
-                    .foregroundColor(.green)
-                if (sender.state.remoteCode != "") {
-                    Text(" on \(sender.state.remoteCode)")
-                        .fontWeight(.bold)
-                }
-            }
-        }
-    }
 }
 
 struct FileSelectorSubview: View {
     let fileType: Bool
+    @ObservedObject var sender: Sender
     
-    @Binding var sender: Sender
     @Binding var showFileSelectorCard: Bool
     @Binding var showFilePreviewCard: Bool
     
@@ -241,7 +216,7 @@ struct FileSelectorSubview: View {
 }
 
 struct FilePreviewSubview: View {
-    let connectionStatusView: AnyView
+    @ObservedObject var senderState: SenderState
     
     @Binding var textToSend: String
     @Binding var photoToSendImg: UIImage?
@@ -249,7 +224,7 @@ struct FilePreviewSubview: View {
     
     var body: some View {
         VStack {
-            connectionStatusView
+            getConnectionStatus(senderState)
                 .frame(alignment: .leading)
                 .padding()
             
@@ -294,6 +269,31 @@ struct FilePreviewSubview: View {
         }
         .presentationDetents([.fraction(0.7)])
         .padding()
+    }
+}
+
+@ViewBuilder private func getConnectionStatus(_ ss: SenderState) -> some View {
+    if (ss.wsConnected != .connected) {
+        Text("Disconnected")
+            .foregroundColor(.red)
+    } else if (ss.wsConnected == .connected && !ss.remoteConnected) {
+        VStack(spacing: 0) {
+            Text("Waiting for remote connection")
+                .foregroundColor(.yellow)
+            if (ss.remoteCode != "") {
+                Text(" on \(ss.remoteCode)")
+                    .fontWeight(.bold)
+            }
+        }
+    } else if (ss.wsConnected == .connected && ss.remoteConnected) {
+        VStack(spacing: 0) {
+            Text("Connected")
+                .foregroundColor(.green)
+            if (ss.remoteCode != "") {
+                Text(" on \(ss.remoteCode)")
+                    .fontWeight(.bold)
+            }
+        }
     }
 }
 

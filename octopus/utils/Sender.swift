@@ -19,7 +19,9 @@ class Sender: ObservableObject {
         didSet {
             // If non-nil, call sendData
             if let fileData {
-                sendData(fileData)
+                DispatchQueue.main.async { [weak self] in
+                    self?.sendData(fileData)
+                }
             }
         }
     }
@@ -45,7 +47,7 @@ class Sender: ObservableObject {
     }
     
     private func sendData(_ data: Data) {
-        print("New data of size \(data)B detected")
+        print("New data of size \(data) detected")
         
         let connectionReady = (self.state.wsConnected == .connected) && self.state.remoteConnected
         
@@ -58,13 +60,72 @@ class Sender: ObservableObject {
                 self.socket?.write(string: toSend)
             } else {
                 print("Connection not yet ready, queueing item")
-                sendQueue.append(toSend)
+                self.sendQueue.append(toSend)
             }
         }
         // File
         else {
+            // First split file into chunks
+            print("Splitting file into chunks")
+            let chunks = chunkifyData_(fileData: data, chunkSize: 1024 * 1 /* 1KB */)
             
+            // Send "handshake" message telling server that we are sending file
+            // Also includes filename, filesize, chunk count
+            let metadata = "\(self.state.remoteCode): FILE,\(self.fileName.replacingOccurrences(of: ",", with: "-")),\(data.count),\(chunks.count)"
+            if (connectionReady) {
+                self.socket?.write(string: metadata)
+                print("Sent file metadata")
+            } else {
+                self.sendQueue.append(metadata)
+                print("Connection not ready, adding file metadata to queue")
+            }
+            
+            // Add metadata to chunks then send to remote
+            for (i, c) in chunks.enumerated() {
+                print("Processing new chunk #\(i)")
+                
+                // Get binary data from Data (1024 B)
+                let fileBinaryData = Array(c)
+                
+                // Create metadata
+                var segmentNumber = Int32(i)
+                var segmentSize = Int16(fileBinaryData.count)
+                
+                // Combine into one Data object, with padding
+                var finalBinaryData = Data()
+                finalBinaryData.append(Data(bytes: &segmentNumber, count: MemoryLayout<Int32>.size))
+                finalBinaryData.append(Data(bytes: &segmentSize, count: MemoryLayout<Int16>.size))
+                finalBinaryData.append(contentsOf: fileBinaryData)
+                
+                // Send to remote
+                let finalData = finalBinaryData.base64EncodedString()
+                
+                if (connectionReady) {
+                    print("Sending message")
+                    self.socket?.write(string: "\(self.state.remoteCode): \(finalData)")
+                } else {
+                    print("Connection not yet ready, queueing item")
+                    self.sendQueue.append("\(self.state.remoteCode): \(finalData)")
+                }
+                
+            }
         }
+    }
+    
+    private func chunkifyData_(fileData: Data, chunkSize: Int) -> [Data] {
+        var chunks: [Data] = []
+        var currentIndex = 0
+        
+        while currentIndex < fileData.count {
+            let remainingCount = fileData.count - currentIndex
+            let chunkLength = min(chunkSize, remainingCount)
+            let chunkRange = currentIndex..<currentIndex + chunkLength
+            let chunkData = fileData.subdata(in: chunkRange)
+            chunks.append(chunkData)
+            currentIndex += chunkLength
+        }
+        
+        return chunks
     }
 }
 

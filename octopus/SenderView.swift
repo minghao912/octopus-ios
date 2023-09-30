@@ -299,7 +299,7 @@ struct FilePreviewSubview: View {
 
 #Preview {
     VStack {
-        SenderView(fileType: false, restart: {})
+        SenderView(fileType: true, restart: {})
     }
     .frame(maxHeight: 800)
     .padding()

@@ -24,6 +24,7 @@
 		3A7188342AB9390B00DF1439 /* octopusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7188332AB9390B00DF1439 /* octopusTests.swift */; };
 		3A71883E2AB9390B00DF1439 /* octopusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71883D2AB9390B00DF1439 /* octopusUITests.swift */; };
 		3A7188402AB9390B00DF1439 /* octopusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71883F2AB9390B00DF1439 /* octopusUITestsLaunchTests.swift */; };
+		3AA721C32AD3654400EE6DA5 /* ReceiverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA721C22AD3654400EE6DA5 /* ReceiverView.swift */; };
 		3AEC26E02AC4EF470041A8A0 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 3AEC26DF2AC4EF470041A8A0 /* Starscream */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		3A7188392AB9390B00DF1439 /* octopusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = octopusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A71883D2AB9390B00DF1439 /* octopusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = octopusUITests.swift; sourceTree = "<group>"; };
 		3A71883F2AB9390B00DF1439 /* octopusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = octopusUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3AA721C22AD3654400EE6DA5 /* ReceiverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				3A327D4A2AC1323400586FF0 /* Preview Content */,
 				3A327D522AC1323400586FF0 /* SenderView.swift */,
 				3A327D472AC1323400586FF0 /* utils */,
+				3AA721C22AD3654400EE6DA5 /* ReceiverView.swift */,
 			);
 			path = octopus;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				3A327D5C2AC1323400586FF0 /* DocumentPickerView.swift in Sources */,
 				3A327D562AC1323400586FF0 /* SenderState.swift in Sources */,
 				3A327D5D2AC1323400586FF0 /* ContentView.swift in Sources */,
+				3AA721C32AD3654400EE6DA5 /* ReceiverView.swift in Sources */,
 				3A327D5B2AC1323400586FF0 /* FadingTextView.swift in Sources */,
 				3A327D542AC1323400586FF0 /* octopusApp.swift in Sources */,
 				3A327D592AC1323400586FF0 /* ActionCardView.swift in Sources */,

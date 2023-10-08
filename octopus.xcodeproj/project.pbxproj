@@ -25,6 +25,11 @@
 		3A71883E2AB9390B00DF1439 /* octopusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71883D2AB9390B00DF1439 /* octopusUITests.swift */; };
 		3A7188402AB9390B00DF1439 /* octopusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A71883F2AB9390B00DF1439 /* octopusUITestsLaunchTests.swift */; };
 		3AA721C32AD3654400EE6DA5 /* ReceiverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA721C22AD3654400EE6DA5 /* ReceiverView.swift */; };
+		3AA721C52AD367A800EE6DA5 /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA721C42AD367A800EE6DA5 /* Receiver.swift */; };
+		3AA721C72AD367CE00EE6DA5 /* ReceiverState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA721C62AD367CE00EE6DA5 /* ReceiverState.swift */; };
+		3AA721CB2AD36DEB00EE6DA5 /* WSState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA721CA2AD36DEB00EE6DA5 /* WSState.swift */; };
+		3AA721CD2AD36F9400EE6DA5 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA721CC2AD36F9400EE6DA5 /* ConnectionState.swift */; };
+		3AA721CF2AD3706600EE6DA5 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA721CE2AD3706600EE6DA5 /* HelperFunctions.swift */; };
 		3AEC26E02AC4EF470041A8A0 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 3AEC26DF2AC4EF470041A8A0 /* Starscream */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +73,11 @@
 		3A71883D2AB9390B00DF1439 /* octopusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = octopusUITests.swift; sourceTree = "<group>"; };
 		3A71883F2AB9390B00DF1439 /* octopusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = octopusUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3AA721C22AD3654400EE6DA5 /* ReceiverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverView.swift; sourceTree = "<group>"; };
+		3AA721C42AD367A800EE6DA5 /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
+		3AA721C62AD367CE00EE6DA5 /* ReceiverState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverState.swift; sourceTree = "<group>"; };
+		3AA721CA2AD36DEB00EE6DA5 /* WSState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSState.swift; sourceTree = "<group>"; };
+		3AA721CC2AD36F9400EE6DA5 /* ConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionState.swift; sourceTree = "<group>"; };
+		3AA721CE2AD3706600EE6DA5 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +133,11 @@
 			children = (
 				3A327D482AC1323400586FF0 /* SenderState.swift */,
 				3A327D492AC1323400586FF0 /* Sender.swift */,
+				3AA721C42AD367A800EE6DA5 /* Receiver.swift */,
+				3AA721C62AD367CE00EE6DA5 /* ReceiverState.swift */,
+				3AA721CA2AD36DEB00EE6DA5 /* WSState.swift */,
+				3AA721CC2AD36F9400EE6DA5 /* ConnectionState.swift */,
+				3AA721CE2AD3706600EE6DA5 /* HelperFunctions.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -313,14 +328,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AA721CB2AD36DEB00EE6DA5 /* WSState.swift in Sources */,
 				3A327D572AC1323400586FF0 /* Sender.swift in Sources */,
 				3A327D5A2AC1323400586FF0 /* HeaderView.swift in Sources */,
+				3AA721C72AD367CE00EE6DA5 /* ReceiverState.swift in Sources */,
 				3A327D532AC1323400586FF0 /* BigButtonView.swift in Sources */,
 				3A327D5C2AC1323400586FF0 /* DocumentPickerView.swift in Sources */,
 				3A327D562AC1323400586FF0 /* SenderState.swift in Sources */,
 				3A327D5D2AC1323400586FF0 /* ContentView.swift in Sources */,
+				3AA721C52AD367A800EE6DA5 /* Receiver.swift in Sources */,
 				3AA721C32AD3654400EE6DA5 /* ReceiverView.swift in Sources */,
 				3A327D5B2AC1323400586FF0 /* FadingTextView.swift in Sources */,
+				3AA721CF2AD3706600EE6DA5 /* HelperFunctions.swift in Sources */,
+				3AA721CD2AD36F9400EE6DA5 /* ConnectionState.swift in Sources */,
 				3A327D542AC1323400586FF0 /* octopusApp.swift in Sources */,
 				3A327D592AC1323400586FF0 /* ActionCardView.swift in Sources */,
 				3A327D5E2AC1323400586FF0 /* SenderView.swift in Sources */,

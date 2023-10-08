@@ -100,6 +100,8 @@ struct ActionCardView: View {
         case 2:
             if (sendMode) {
                 SenderView(fileType: fileType, restart: restart)
+            } else {
+                ReceiverView(fileType: fileType, restart: restart)
             }
         default:
             exit(1)

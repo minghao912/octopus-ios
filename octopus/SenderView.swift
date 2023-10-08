@@ -224,7 +224,7 @@ struct FilePreviewSubview: View {
     
     var body: some View {
         VStack {
-            getConnectionStatus(senderState)
+            HelperFunctions.getConnectionStatus(senderState)
                 .frame(alignment: .leading)
                 .padding()
             
@@ -269,31 +269,6 @@ struct FilePreviewSubview: View {
         }
         .presentationDetents([.fraction(0.7)])
         .padding()
-    }
-}
-
-@ViewBuilder private func getConnectionStatus(_ ss: SenderState) -> some View {
-    if (ss.wsConnected != .connected) {
-        Text("Disconnected")
-            .foregroundColor(.red)
-    } else if (ss.wsConnected == .connected && !ss.remoteConnected) {
-        VStack(spacing: 0) {
-            Text("Waiting for remote connection")
-                .foregroundColor(.yellow)
-            if (ss.remoteCode != "") {
-                Text(" on \(ss.remoteCode)")
-                    .fontWeight(.bold)
-            }
-        }
-    } else if (ss.wsConnected == .connected && ss.remoteConnected) {
-        VStack(spacing: 0) {
-            Text("Connected")
-                .foregroundColor(.green)
-            if (ss.remoteCode != "") {
-                Text(" on \(ss.remoteCode)")
-                    .fontWeight(.bold)
-            }
-        }
     }
 }
 

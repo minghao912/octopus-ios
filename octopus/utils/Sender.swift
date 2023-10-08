@@ -8,10 +8,10 @@
 import Foundation
 import Starscream
 
-let WS_URL = "wss://octopus-server.chenminghao.co/server-ws/send"
-// let WS_URL = "ws://localhost:8089"
-
 class Sender: ObservableObject {
+    let WS_URL = "wss://octopus-server.chenminghao.co/server-ws/send"
+    // let WS_URL = "ws://localhost:8089"
+    
     @Published public var state: SenderState = SenderState()
     
     public var fileName: String = ""
@@ -30,10 +30,10 @@ class Sender: ObservableObject {
     private var sendQueue: [String] = []
     
     init() {
-        print("Initializing WS")
+        print("Initializing Sender WS")
         
         // Start WS
-        var request = URLRequest(url: URL(string: WS_URL)!)
+        var request = URLRequest(url: URL(string: self.WS_URL)!)
         request.timeoutInterval = 10
         
         self.socket = Starscream.WebSocket(request: request)
